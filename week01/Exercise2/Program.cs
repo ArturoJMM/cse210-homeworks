@@ -13,29 +13,34 @@ class Program
         if (grade >= 90)
         {
             letter = "A";
-            Console.WriteLine($"Your Grade is: {letter}");
         }
         else if (grade >= 80)
         {
             letter = "B";
-            Console.WriteLine($"Your Grade is: {letter}");
         }
         else if (grade >= 70)
         {
             letter = "C";
-            Console.WriteLine($"Your Grade is: {letter}");
         }
         else if (grade >= 60)
         {
             letter = "D";
-            Console.WriteLine($"Your Grade is: {letter}");
         }
         else
         {
             letter = "F";
-            Console.WriteLine($"Your Grade is: {letter}");
         }
 
-    
+        Console.WriteLine($"Your Grade is: {letter}");
+
+        if (grade >= 70)
+        {
+           Console.WriteLine("Congratulation! You passed."); 
+        }
+        else
+        {
+            Console.WriteLine("Better luck next time!"); 
+        }
+  
     }
 }
