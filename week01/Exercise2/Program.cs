@@ -3,7 +3,9 @@ using System;
 class Program
 {
     static void Main(string[] args)
-    {   // Core Requirements for the excercise
+    {   
+        Console.WriteLine("Hello World! This is the Exercise2 Project.");
+        // Core Requirements for the excercise
         Console.Write("What is your grade percentage? ");
         string userInput = Console.ReadLine();
         
