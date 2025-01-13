@@ -18,9 +18,7 @@ class Program
         job2._startYear = 2018;
         job2._endYear = 2021;
 
-        Console.WriteLine($"{job1._company}");
-        Console.WriteLine($"{job2._company}");
-
-
+        job1.DisplayDetails();
+        job2.DisplayDetails();
     }
 }
