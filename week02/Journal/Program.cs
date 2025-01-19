@@ -9,6 +9,14 @@ class Program
         Console.WriteLine("Hello World! This is the Journal Project.");
         Journal journal = new Journal();
         PromptGenerator promptGenerator = new PromptGenerator();
+        Console.WriteLine("What is your first Name: ");
+        string firstName = Console.ReadLine();
+        Console.WriteLine("What is your last Name: ");
+        string lastName = Console.ReadLine();
+        Console.WriteLine("What is your age: ");
+        int age = int.Parse(Console.ReadLine());
+        Owner owner = new Owner(firstName, lastName, age);
+        owner.DisplayOwnerData();
         
         bool quit = false;
         while (!quit)
