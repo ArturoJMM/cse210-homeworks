@@ -29,7 +29,7 @@ class Program
                 string response = Console.ReadLine();
                 Entry entry = new Entry(DateTime.Now, prompt, response);
                 journal.AddEntry(entry);
-                //entry.Display();
+                entry.Display();
             }
 
             else if (choice == 2)
@@ -39,7 +39,24 @@ class Program
 
             else if (choice == 3)
             {
-                
+                Console.WriteLine("Enter the filename to SAVE the journal: ");
+                string fileName = Console.ReadLine();
+                journal.SaveToFile(fileName);
+                Console.WriteLine("Your Journal have been saved successfully.");
+            }
+
+            else if (choice == 4)
+            {
+                Console.WriteLine("Enter the filename to LOAD the journal: ");
+                string fileName = Console.ReadLine();
+                journal.LoadFormFile(fileName);
+                Console.WriteLine("Journal loaded successfully.");
+            }
+
+            else if (choice == 5)
+            {
+                quit = true;
+                Console.WriteLine("GoodBye!");
             }
 
         }
