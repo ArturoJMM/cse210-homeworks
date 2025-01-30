@@ -5,7 +5,9 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("Hello World! This is the YouTubeVideos Project.");
+        Console.ResetColor();
         Console.WriteLine();
 
         Video video1 = new Video("Class with Benji Monroy | “The Hearts of Children Will Turn to Parents” | D&C 2", "Scripture Central", 3997);
@@ -32,7 +34,9 @@ class Program
         foreach (var video in videos)
         {
             video.DisplayVideoInfo();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Number of Comments: {video.GetCommentCount()}");
+            Console.ResetColor();
 
             foreach (var comment in video.GetComments())
             {

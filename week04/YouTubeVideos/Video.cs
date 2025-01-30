@@ -19,6 +19,7 @@ public class Video
     public void DisplayVideoInfo()
     {
         string videoData = $"Title: {_title} \nAuthor: {_author}\nLength: {_videoLength} seconds";
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine(videoData);
     }
 
@@ -42,7 +43,10 @@ public class Video
 
     public void DisplayComment(Comment comment)
     {
-        Console.WriteLine($"The user {comment.GetCommenterName()} wrote: '{comment.GetText()}'");
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write($"The user {comment.GetCommenterName()} wrote: ");
+        Console.ResetColor();
+        Console.WriteLine($"'{comment.GetText()}'");
     }
 
 }
