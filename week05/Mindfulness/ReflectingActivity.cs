@@ -43,23 +43,29 @@ public class ReflectingActivity : Activity
 
     public void DisplayPrompt(string prompt)
     {
-        Console.WriteLine($"--- {prompt} ---");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine($"\n--- {prompt} ---");
+        Console.ResetColor();
     }
 
     public void DisplayQuestion(string question)
     {
-        Console.Write($"--- {question} --- ");
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.WriteLine($"{question} ");
+        Console.ResetColor();
     }
 
     public void Start()
     {
         DisplayStartingMessage();
+        Console.Clear();
         Console.WriteLine("Consider the following prompt:");
         string prompt = GetRandomPrompt();
         DisplayPrompt(prompt);
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("\nWhen you have something in mind, press enter to continue.");
         Console.ReadLine();
-        Console.WriteLine("\nNow ponder on each of the following questions as they related to this experience.");
+        Console.WriteLine("Now ponder on each of the following questions as they related to this experience.");
         Console.Write($"You may begin in: ");
         ShowCountDown(5);
         Console.Clear();
@@ -70,6 +76,5 @@ public class ReflectingActivity : Activity
             ShowSpinner(10);
         }
         DisplayEndingMessage();
-
     }
 }

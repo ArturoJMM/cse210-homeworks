@@ -16,32 +16,40 @@ public class Activity
 
     public void DisplayStartingMessage()
     {
+        Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine($"\nLet's begin with the {_activityName}!\n");
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine(_description);
-        Console.WriteLine("How long, in seconds, would you like for your session? ");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("\nHow long, in seconds, would you like for your session? ");
         _duration = int.Parse(Console.ReadLine());
         Console.Clear();
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.Write("Get ready we begin in: ");
         ShowCountDown(5);
+        Console.WriteLine();
+        
 
     }
 
     public void DisplayEndingMessage()
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("\nGood Job!");
-        ShowSpinner(3);
         Console.WriteLine($"\nYou have completed the {_activityName} for {_duration} seconds.");
+        ShowSpinner(3);
+        Console.ResetColor();
     }
 
     public void ShowSpinner(int seconds)
     {
-        List<string> spinners = new List<string>{"|", "/", "-", "\\", "|", "/", "-", "\\"};
+        List<string> spinners = new List<string>{"|", "/", "-", "\\"};
         for (int i = seconds; i > 0; i--)
         {
             foreach (string s in spinners)
             {
-                Console.WriteLine(s);
-                Thread.Sleep(800);
+                Console.Write(s);
+                Thread.Sleep(500);
                 Console.Write("\b \b");
             }
         }
@@ -51,20 +59,10 @@ public class Activity
     {
         for (int i = seconds; i > 0; i--)
         {
-            Console.WriteLine(i);
+            Console.Write(i);
             Thread.Sleep(1000);
             Console.Write("\b \b");
         }
     }
 
-    public void actionTime()
-    {
-        DateTime startTime = DateTime.Now;
-        DateTime endTime = startTime.AddSeconds(_duration);
-
-        while (DateTime.Now < endTime)
-        {
-
-        }
-    }
 }

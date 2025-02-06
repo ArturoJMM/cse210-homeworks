@@ -24,7 +24,8 @@ public class ListingActivity : Activity
 
     public void DisplayPrompt(string prompt)
     {
-        Console.WriteLine($"---> {prompt} <---");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine($"\n---> {prompt} <---\n");
     }
 
     public List<string> GetListFormUser()
@@ -39,20 +40,23 @@ public class ListingActivity : Activity
         Console.WriteLine("List as many responses you can to the following prompt:");
         string prompt = GetRandomPrompt();
         DisplayPrompt(prompt);
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.Write($"You may begin in: ");
         ShowCountDown(5);
-        Console.Clear();
+        Console.WriteLine();
         List<string> items = GetListFormUser();
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_duration);
         
         while (DateTime.Now < endTime)
         {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write("> ");
             items.Add(Console.ReadLine());
             _count++;
         }
 
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"You listed {_count} responses.");
         DisplayEndingMessage();
 
