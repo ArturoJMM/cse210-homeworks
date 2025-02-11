@@ -8,21 +8,25 @@ class Program
     {
         Console.WriteLine("Hello World! This is the Shapes Project.");
 
-        Square square1 =  new Square("blue", 25);
-        string color1 = square1.GetColor();
-        double area1 = square1.GetArea();
+        List<Shapes> shapes = new List<Shapes>();
 
-        Circle circle1 = new Circle("black", 12);
-        string color2 = circle1.GetColor();
-        double area2 = circle1.GetArea();
+        Square sh1 = new Square("Orange", 23.5);
+        Rectangle sh2 = new Rectangle("Green", 22, 13);
+        Circle sh3 = new Circle("Red", 16);
 
-        Rectangle rect1 = new Rectangle("green", 16, 9);
-        string color3 = rect1.GetColor();
-        double area3 = rect1.GetArea();
+        shapes.Add(sh1);
+        shapes.Add(sh2);
+        shapes.Add(sh3);
 
-       
-        Console.WriteLine($"The shape of color {color1}, has an area of {area1} cm2");
-        Console.WriteLine($"The shape of color {color2}, has an area of {area2} cm2");
-        Console.WriteLine($"The shape of color {color3}, has an area of {area3} cm2");
+        foreach (Shapes shape in shapes)
+        {
+            string color = shape.GetColor();
+
+            double area = shape.GetArea();
+
+            Console.WriteLine($"The shape of color {color}, has an area of {area} cm2");
+        }
+            
+        
     }
 }
