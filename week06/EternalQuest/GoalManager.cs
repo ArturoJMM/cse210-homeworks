@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
 using System.IO;
 
 public class GoalManager
@@ -17,6 +18,10 @@ public class GoalManager
         bool play = true;
         while (play)
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("****** EternalQuest Project. ******");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine($"\nYou have {_score} points\n");
 
@@ -39,26 +44,48 @@ public class GoalManager
             if (choice == "1")
             {
                 CreateGoal();
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("Press enter to continue...");
+                Console.ResetColor();
+                Console.ReadLine();
             }
             else if (choice == "2")
             {
                 ListGoalDetails();
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("Press enter to continue...");
+                Console.ResetColor();
+                Console.ReadLine();
             }
             else if (choice == "3")
             {
                 SaveGoals();
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("Press enter to continue...");
+                Console.ResetColor();
+                Console.ReadLine();
             }
             else if (choice == "4")
             {
                 LoadGoals();
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("Press enter to continue...");
+                Console.ResetColor();
+                Console.ReadLine();
             }
             else if (choice == "5")
             {
                 RecordEvent();
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("Press enter to continue...");
+                Console.ResetColor();
+                Console.ReadLine();
             }
             else if (choice == "6")
             {
-                Console.WriteLine("Goodbye!");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("****** Goodbye! ******");
+                Console.ResetColor();
                 play = false;
             }
             else
@@ -72,17 +99,6 @@ public class GoalManager
         }
     }
 
-    public void DisplayPlayerInfo()
-    {
-        Console.WriteLine($"\nPlayer Information:");
-        Console.WriteLine($"Score: {_score}");
-        Console.WriteLine("Goals:");
-        foreach (Goal goal in _goals)
-        {
-            Console.WriteLine($"- {goal.GetDetailsString()}");
-        }
-    }
-
     public void ListGoalNames()
     {
         foreach (Goal goal in _goals)
@@ -93,118 +109,164 @@ public class GoalManager
 
     public void ListGoalDetails()
     {
-        Console.WriteLine("\nGoal Recorded:");
+        if (_goals.Count == 0)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\nYour goal list is empty, go and create one!");
+            Console.ResetColor();
+            return;
+        }
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("\nGoals Recorded:");
+        Console.ResetColor();
         for (int i = 0; i < _goals.Count; i++)
         {
-            foreach (Goal goal in _goals)
-            {
-                if (i != 0)
-                {
-                    Console.WriteLine($"{i + 1}. {goal.GetDetailsString()}");
-                }
-                else
-                {
-                    Console.WriteLine("Your goal list is empty, go and create one!");
-                }
-            }
+            Goal goal = _goals[i];
+            Console.WriteLine($"{i + 1}. {goal.GetDetailsString()}");
         }
-
     }
+    
     public void CreateGoal()
     {
         Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("The types of Goals are:");
+        Console.ResetColor();
         Console.WriteLine(" 1. Simple Goal");
         Console.WriteLine(" 2. Eternal Goal");
         Console.WriteLine(" 3. Checklist Goal");
         
-        Console.Write("Which type of goal would you like to create? ");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write("\nWhich type of goal would you like to create? ");
         string choice = Console.ReadLine();
 
-        if (choice == "1")
+        if (choice != "1" && choice != "2" && choice != "3")
         {
-            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Invalid choice. Please try again.");
+        }
+        
+        else if (choice == "1")
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("What is the name of your Goal? ");
+            Console.ResetColor();
             string shortName = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("Write a short description of your Goal? ");
+            Console.ResetColor();
             string description = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("What is the amount of points to earn with this goal? ");
+            Console.ResetColor();
             int points = int.Parse(Console.ReadLine());
             _goals.Add(new SimpleGoal(shortName, description, points));
 
         }
         else if (choice == "2")
         {
-            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("What is the name of your Goal? ");
+            Console.ResetColor();
             string shortName = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("Write a short description of your Goal? ");
+            Console.ResetColor();
             string description = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("What is the amount of points to earn with this goal? ");
+            Console.ResetColor();
             int points = int.Parse(Console.ReadLine());
             _goals.Add(new EternalGoal(shortName, description, points));
         }
         else if (choice == "3")
         {
-            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("What is the name of your Goal? ");
+            Console.ResetColor();
             string shortName = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("Write a short description of your Goal? ");
+            Console.ResetColor();
             string description = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("What is the amount of points to earn with this goal? ");
+            Console.ResetColor();
             int points = int.Parse(Console.ReadLine());
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("How many times does this goal need to be accomplished for a bonus? ");
+            Console.ResetColor();
             int target = int.Parse(Console.ReadLine());
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("What is the BONUS for accomplishing it tha many times? ");
+            Console.ResetColor();
             int bonus = int.Parse(Console.ReadLine());
             _goals.Add(new CheckListGoal(shortName, description, points, target, bonus));
         }
-        else
-        {
-            Console.WriteLine("Invalid choice. Please try again.");
-            return;
-        }
+        
     }
 
     public void RecordEvent()
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("\nAvailable Goals:");
+        Console.ResetColor();
         for (int i = 0; i < _goals.Count; i++)
         {
-            foreach (Goal goal in _goals)
-            {
-                Console.WriteLine($"{i + 1}. {goal.GetShortName()}");
-            }
+            Goal goal = _goals[i];
+            Console.WriteLine($"{i + 1}. {goal.GetShortName()}");
         }
 
-        Console.Write("Which goal did you accomplished: ");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write("\nWhich goal did you accomplished: ");
+        Console.ResetColor();
         int choice = int.Parse(Console.ReadLine()) - 1;
 
-        if (choice >= 0 && choice <= _goals.Count)
+        if (choice < 0 || choice > _goals.Count)
         {
-            Goal selectedGoal = _goals[choice];
-            selectedGoal.RecordEvent();
-
-            if (selectedGoal.IsComplete())
-            {
-                _score += selectedGoal.GetPoints();
-                Console.WriteLine($"Congratulations! You earned {selectedGoal.GetPoints()} points");
-                Console.WriteLine($"Naow you have {_score} points.");
-            }
-            else
-            {
-                Console.WriteLine("Event recorded successfully!");
-            }
-        }
-        else 
-        {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Invalid choice.");
+            Console.ResetColor();
+            return;
         }
+        
+        Goal selectedGoal = _goals[choice];
+        selectedGoal.RecordEvent();
 
+        if (selectedGoal.IsComplete())
+        {
+            _score += selectedGoal.GetPoints();
+
+            if (selectedGoal is CheckListGoal checklistGoal)
+            {
+                if (!checklistGoal.IsBonusAwarded())
+                {
+                    _score += checklistGoal.GetBonus();
+                    checklistGoal.SetBonusAwarded(true);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("The bonus for this goal has already been awarded.");
+                    Console.ResetColor();
+                }
+            } 
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"\nCongratulations! You earned {selectedGoal.GetPoints()} points.");
+            Console.ResetColor();
+            Console.WriteLine($"Now you have {_score} points.");
+        }
+        else
+        {
+            Console.WriteLine("Event recorded successfully!");
+        }
     }
     public void SaveGoals()
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.Write("What is the filename for the goal file? ");
+        
         string filename = Console.ReadLine();
 
         using (StreamWriter writer = new StreamWriter(filename))
@@ -215,17 +277,22 @@ public class GoalManager
                 writer.WriteLine(goal.GetStringRepresentation());
             }
         }
-        Console.WriteLine("Goals saved successfully!");
+        Console.WriteLine("\nGoals saved successfully!");
+        Console.ResetColor();
     }
 
     public void LoadGoals()
     {
-        Console.Write("What is the filename for the goal file? (add the '.txt' at th end) ");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write("\nWhat is the filename for the goal file? (add the '.txt' at th end) ");
+        Console.ResetColor();
         string filename = Console.ReadLine();
 
         if (!File.Exists(filename))
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("No saved goals file found.");
+            Console.ResetColor();
             return;
         }
         
@@ -250,11 +317,12 @@ public class GoalManager
                bool isComplete = bool.Parse(data[3]);
 
                Goal goal = new SimpleGoal(shortName, description, points);
+               
                if (isComplete)
                {
-                goal.RecordEvent();
-                _goals.Add(goal);
+                    goal.RecordEvent();
                }
+               _goals.Add(goal);
             }
             else if (type == "EternalGoal")
             {
@@ -267,8 +335,8 @@ public class GoalManager
                 for (int t = 0; t < timesRecorded; t++)
                 {
                     goal.RecordEvent();
-                    _goals.Add(goal);
                 }
+                _goals.Add(goal);
             }
             else if (type == "ChecklistGoal")
             {
@@ -278,17 +346,23 @@ public class GoalManager
                 int bonus = int.Parse(data[3]);
                 int target = int.Parse(data[4]);
                 int amountCompleted = int.Parse(data[5]);
+                bool bonusAwarded = bool.Parse(data[6]);
 
                 Goal goal = new CheckListGoal(shortName, description, points, target, bonus);
 
                 for (int j = 0; j < amountCompleted; j++)
                 {
                     goal.RecordEvent();
-                    _goals.Add(goal);
                 }
+                if (goal is CheckListGoal checkListGoal)
+                {
+                    checkListGoal.SetBonusAwarded(bonusAwarded);
+                }
+                _goals.Add(goal);
             }
         }
-        
-        Console.WriteLine("Your goals file has been loaded successfully!");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("\nYour goals file has been loaded successfully!");
+        Console.ResetColor();
     }
 }

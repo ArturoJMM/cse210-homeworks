@@ -23,17 +23,17 @@ public class EternalGoal : Goal
     public override string GetDetailsString()
     {
         string status = "[ ]";
-        if (_timesRecorded == 1)
+        if (_timesRecorded <= 1)
         {
-            return $"{status} {GetShortName()} ({GetDescription()}) - Done by {_timesRecorded} time";
+            return $"{status} {GetShortName()} ({GetDescription()}) -- Done by {_timesRecorded} time";
         }
         else
         {
-            return $"{status} {GetShortName()} ({GetDescription()}) - Done by {_timesRecorded} times";
+            return $"{status} {GetShortName()} ({GetDescription()}) -- Done by {_timesRecorded} times";
         }
     }
     public override string GetStringRepresentation()
     {
-        return $"EternalGoal:{GetShortName()},({GetDescription()}),{GetPoints()},{_timesRecorded}";
+        return $"EternalGoal:{GetShortName()},{GetDescription()},{GetPoints()},{_timesRecorded}";
     }
 }
